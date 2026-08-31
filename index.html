@@ -1,102 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#090b11" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="description" content="Swipe through startup ideas and save the ones worth building." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="refresh" content="0; url=/index-v2.html" />
   <title>SwipeStart</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <script>location.replace('/index-v2.html');</script>
 </head>
-<body>
-  <div class="background-orb orb-one"></div>
-  <div class="background-orb orb-two"></div>
-
-  <main class="app-shell">
-    <header class="topbar">
-      <div class="brand-lockup">
-        <div class="brand-mark" aria-hidden="true">S</div>
-        <div>
-          <p class="eyebrow">IDEA DISCOVERY</p>
-          <h1>SwipeStart</h1>
-        </div>
-      </div>
-      <button class="icon-button" id="resetButton" type="button" aria-label="Reset deck" title="Reset deck">
-        <span aria-hidden="true">↻</span>
-      </button>
-    </header>
-
-    <section class="screen active" id="discoverScreen" aria-label="Discover startup ideas">
-      <div class="intro-row">
-        <div>
-          <p class="section-kicker">Find your next thing</p>
-          <h2>Would you build it?</h2>
-        </div>
-        <div class="progress-pill"><span id="progressCount">1</span>/<span id="progressTotal">0</span></div>
-      </div>
-
-      <div class="filter-strip" id="filterStrip" aria-label="Idea filters">
-        <button class="filter-chip active" type="button" data-filter="All">All</button>
-        <button class="filter-chip" type="button" data-filter="AI">AI</button>
-        <button class="filter-chip" type="button" data-filter="Consumer">Consumer</button>
-        <button class="filter-chip" type="button" data-filter="SaaS">SaaS</button>
-        <button class="filter-chip" type="button" data-filter="Creator">Creator</button>
-        <button class="filter-chip" type="button" data-filter="Local">Local</button>
-      </div>
-
-      <div class="deck-wrap">
-        <div class="swipe-hint swipe-hint-nope" id="nopeHint">PASS</div>
-        <div class="swipe-hint swipe-hint-like" id="likeHint">BUILD</div>
-        <div class="card-stack" id="cardStack" aria-live="polite"></div>
-      </div>
-
-      <div class="action-row" aria-label="Swipe actions">
-        <button class="action-button action-pass" id="passButton" type="button" aria-label="Pass on idea">
-          <span class="action-icon">×</span>
-          <span class="action-label">Pass</span>
-        </button>
-        <button class="action-button action-undo" id="undoButton" type="button" aria-label="Undo last swipe">
-          <span class="action-icon">↶</span>
-        </button>
-        <button class="action-button action-build" id="buildButton" type="button" aria-label="Save idea">
-          <span class="action-icon">♥</span>
-          <span class="action-label">Build</span>
-        </button>
-      </div>
-
-      <p class="keyboard-tip">Drag the card or use ← / →</p>
-    </section>
-
-    <section class="screen" id="savedScreen" aria-label="Saved startup ideas">
-      <div class="intro-row saved-heading">
-        <div>
-          <p class="section-kicker">Your shortlist</p>
-          <h2>Ideas worth a second look</h2>
-        </div>
-        <div class="saved-count" id="savedCount">0 saved</div>
-      </div>
-      <div class="saved-grid" id="savedGrid"></div>
-    </section>
-
-    <nav class="bottom-nav" aria-label="Main navigation">
-      <button class="nav-item active" type="button" data-screen="discoverScreen">
-        <span class="nav-icon">✦</span>
-        <span>Discover</span>
-      </button>
-      <button class="nav-item" type="button" data-screen="savedScreen">
-        <span class="nav-icon">♥</span>
-        <span>Saved</span>
-        <span class="nav-badge" id="savedBadge">0</span>
-      </button>
-    </nav>
-  </main>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js"></script>
-</body>
+<body></body>
 </html>
