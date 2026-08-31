@@ -1,0 +1,9 @@
+{
+  "appId": "com.jdarkyeka6.swipestart",
+  "appName": "SwipeStart",
+  "webDir": "www",
+  "backgroundColor": "#07080d",
+  "ios": {
+    "contentInset": "always"
+  }
+}
