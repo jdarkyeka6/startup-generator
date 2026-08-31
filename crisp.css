@@ -1,0 +1,21 @@
+/* Crisp-mode overrides for phones: reduce haze and improve legibility */
+html,body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{background:#07080d}
+.ambient{display:none!important}
+.bottom-nav{background:#10131b!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-color:rgba(255,255,255,.12)!important}
+.sheet-backdrop{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(0,0,0,.72)!important}
+.idea-card{box-shadow:0 18px 48px rgba(0,0,0,.42)!important}
+.idea-card::before{opacity:.55}
+.hero-row p,.section-head p,.idea-pitch{color:#c1c7d4!important}
+.brand-copy small,.mini-stats small,.metric small,.idea-number,.card-bottom small,.gesture-tip,.big-stat span,.taste-copy p,.saved-card p,.why-card p{color:#8992a5!important}
+.filter-chip{color:#9aa3b5!important}
+.filter-chip.active{color:#fff!important}
+.metric strong,.saved-card h3,.taste-copy h3,.sheet-block strong{color:#f4f6fb!important}
+.idea-tag{color:#9ca5b6!important;background:rgba(255,255,255,.055)!important}
+.round-button,.avatar-button,.mini-stats div,.deck-progress,.metric,.sheet-block,.why-card,.saved-card,.big-stat{background:#12151e!important}
+@media (max-width:600px){
+  .idea-pitch{font-size:15px!important;line-height:1.5!important}
+  .metric strong{font-size:12px!important}
+  .metric small,.idea-tag,.signal-chip,.card-bottom small{font-size:9px!important}
+  .brand-copy small{font-size:11px!important}
+}
