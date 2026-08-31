@@ -42,7 +42,8 @@ platform :ios do
       UI.message("Registering #{APP_IDENTIFIER} in Apple Developer...")
       Spaceship::ConnectAPI::BundleId.create(
         name: APP_NAME,
-        identifier: APP_IDENTIFIER
+        identifier: APP_IDENTIFIER,
+        platform: "IOS"
       )
     end
 
