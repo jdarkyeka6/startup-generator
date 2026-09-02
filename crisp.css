@@ -13,9 +13,57 @@ body{background:#07080d}
 .metric strong,.saved-card h3,.taste-copy h3,.sheet-block strong{color:#f4f6fb!important}
 .idea-tag{color:#9ca5b6!important;background:rgba(255,255,255,.055)!important}
 .round-button,.avatar-button,.mini-stats div,.deck-progress,.metric,.sheet-block,.why-card,.saved-card,.big-stat{background:#12151e!important}
+
+/* Discover is an app screen, not a webpage. Keep iOS from vertically wandering. */
+html{overscroll-behavior:none}
+body.discover-locked{height:100dvh;overflow:hidden;overscroll-behavior:none;position:fixed;inset:0;width:100%;touch-action:none}
+body.discover-locked .app-shell{height:100dvh;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+body.discover-locked .topbar{flex:0 0 auto;margin-bottom:12px}
+body.discover-locked #discoverScreen.active{display:flex;flex:1;min-height:0;flex-direction:column;overflow:hidden;animation:none}
+body.discover-locked .hero-row,body.discover-locked .mini-stats,body.discover-locked .filter-strip,body.discover-locked .action-row,body.discover-locked .gesture-tip{flex:0 0 auto}
+body.discover-locked .mini-stats{margin:12px 0 10px}
+body.discover-locked .filter-strip{margin-bottom:10px}
+body.discover-locked .deck-wrap{flex:1;min-height:0!important;height:auto}
+body.discover-locked .card-stack{height:100%;min-height:0}
+body.discover-locked .action-row{margin-top:10px}
+body.discover-locked .gesture-tip{margin-top:6px}
+body.discover-locked .idea-card{touch-action:none}
+
+/* Third swipe direction: up = Maybe. */
+.stamp-maybe{left:50%;top:20px;transform:translateX(-50%);color:#ffca68;border-color:currentColor;font-size:19px}
+.saved-section-label{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 10px;color:#7f899d;font-size:9px;font-weight:900;letter-spacing:.14em}
+.saved-section-label strong{display:grid;place-items:center;min-width:24px;height:20px;padding:0 7px;border:1px solid rgba(255,255,255,.09);border-radius:999px;color:#cbd1dc;font-size:9px;letter-spacing:0}
+.saved-section-label.maybe-label{margin-top:24px;color:#d0a85e}
+.maybe-card{border-color:rgba(255,202,104,.13)!important}
+.maybe-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.maybe-actions button{height:36px;border-radius:12px;border:1px solid rgba(255,255,255,.09);background:#171a24;color:#9ba4b7;font-size:9px;font-weight:900;cursor:pointer}
+.maybe-actions .promote-maybe{border-color:rgba(99,239,183,.18);background:rgba(99,239,183,.055);color:#7cefc0}
+
 @media (max-width:600px){
   .idea-pitch{font-size:15px!important;line-height:1.5!important}
   .metric strong{font-size:12px!important}
   .metric small,.idea-tag,.signal-chip,.card-bottom small{font-size:9px!important}
   .brand-copy small{font-size:11px!important}
+}
+
+/* Compress only as much as needed on shorter iPhones so everything remains inside one screen. */
+@media (max-height:850px){
+  body.discover-locked .topbar{margin-bottom:8px}
+  body.discover-locked .hero-row p{display:none}
+  body.discover-locked .mini-stats{margin:8px 0;height:36px}
+  body.discover-locked .mini-stats div{height:36px}
+  body.discover-locked .filter-strip{margin-bottom:8px}
+  body.discover-locked .filter-chip{padding:6px 10px}
+  body.discover-locked .action-row{margin-top:8px}
+  body.discover-locked .gesture-tip{margin-top:4px}
+}
+@media (max-height:720px){
+  body.discover-locked .mini-stats{display:none}
+  body.discover-locked .hero-row h1{font-size:27px}
+  body.discover-locked .filter-strip{margin-top:8px}
+  body.discover-locked .idea-card{padding:17px}
+  body.discover-locked .card-topline{margin-bottom:12px}
+  body.discover-locked .idea-name{font-size:30px}
+  body.discover-locked .idea-pitch{font-size:12px!important}
+  body.discover-locked .signal-row,body.discover-locked .metric-grid{margin:9px 0}
 }
