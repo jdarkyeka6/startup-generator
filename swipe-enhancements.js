@@ -110,6 +110,7 @@ function maybeCardMarkup(i){
 }
 
 renderSaved = function(){
+  state.maybe = Array.isArray(state.maybe) ? state.maybe : [];
   const q=$('savedSearch').value.trim().toLowerCase();
   const matches=i=>!q||`${i.name} ${i.pitch} ${i.tags.join(' ')}`.toLowerCase().includes(q);
   const savedList=state.saved.map(ideaById).filter(Boolean).filter(matches);
@@ -135,10 +136,22 @@ switchScreen=function(id){
 };
 document.body.classList.toggle('discover-locked',document.getElementById('discoverScreen').classList.contains('active'));
 
+$('resetAllButton').onclick=()=>{
+  if(confirm('Reset your saved ideas, Maybe pile and stats?')){
+    state={...defaultState,positions:freshPositions(),filterSeen:freshFilterSeen(),maybe:[]};
+    saveState();renderDeck();renderSaved();switchScreen('discoverScreen');toast('Reset complete');
+  }
+};
+
 // Keyboard parity for desktop testing: ↑ = Maybe, I = details.
 document.addEventListener('keydown',e=>{
   if($('detailSheet').classList.contains('open'))return;
   if(!document.getElementById('discoverScreen').classList.contains('active'))return;
-  if(e.key==='ArrowUp'){e.preventDefault();swipe('up')}
+  if(e.key==='ArrowUp'){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    swipe('up');
+    return;
+  }
   if(e.key.toLowerCase()==='i')openSheet();
 },{capture:true});
