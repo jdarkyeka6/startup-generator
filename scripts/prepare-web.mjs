@@ -10,7 +10,7 @@ await mkdir(out, { recursive: true });
 const html = await readFile(resolve(root, 'index-v2.html'), 'utf8');
 await writeFile(resolve(out, 'index.html'), html, 'utf8');
 
-for (const file of ['styles-v2.css', 'crisp.css', 'ideas-v2.js', 'logic-v2.js']) {
+for (const file of ['styles-v2.css', 'crisp.css', 'ideas-v2.js', 'logic-v2.js', 'swipe-enhancements.js', 'sw.js']) {
   await copyFile(resolve(root, file), resolve(out, file));
 }
 
