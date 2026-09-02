@@ -39,6 +39,27 @@ body.discover-locked .idea-card{touch-action:none}
 .maybe-actions button{height:36px;border-radius:12px;border:1px solid rgba(255,255,255,.09);background:#171a24;color:#9ba4b7;font-size:9px;font-weight:900;cursor:pointer}
 .maybe-actions .promote-maybe{border-color:rgba(99,239,183,.18);background:rgba(99,239,183,.055);color:#7cefc0}
 
+/* Card focus mode: the idea card becomes the entire app screen. */
+.fullscreen-exit{display:none;position:absolute;z-index:40;top:calc(12px + env(safe-area-inset-top));right:14px;width:44px;height:44px;border-radius:15px;border:1px solid rgba(255,255,255,.13);background:rgba(10,12,18,.82);color:#e7eaf1;place-items:center;cursor:pointer}
+.fullscreen-exit svg{width:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+body.card-fullscreen .app-shell{width:100%;max-width:none;height:100dvh!important;padding:0!important;margin:0!important}
+body.card-fullscreen .topbar,body.card-fullscreen .hero-row,body.card-fullscreen .mini-stats,body.card-fullscreen .filter-strip,body.card-fullscreen .action-row,body.card-fullscreen .gesture-tip,body.card-fullscreen .bottom-nav{display:none!important}
+body.card-fullscreen #discoverScreen.active{display:block!important;position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+body.card-fullscreen .deck-wrap{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100%!important;margin:0!important}
+body.card-fullscreen .card-stack{width:100%;height:100%!important;min-height:100%!important}
+body.card-fullscreen .idea-card{inset:0!important;border:0!important;border-radius:0!important;padding:calc(28px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom))!important;box-shadow:none!important}
+body.card-fullscreen .idea-card:nth-child(n+2){display:none}
+body.card-fullscreen .card-topline{padding-right:50px;margin-bottom:30px}
+body.card-fullscreen .idea-name{font-size:clamp(44px,13vw,66px);max-width:94%}
+body.card-fullscreen .idea-pitch{font-size:16px!important;line-height:1.55!important;max-width:96%}
+body.card-fullscreen .signal-row{margin:24px 0}
+body.card-fullscreen .metric-grid{margin:22px 0;gap:10px}
+body.card-fullscreen .metric{padding:14px 11px}
+body.card-fullscreen .card-bottom{left:24px;right:24px;bottom:calc(22px + env(safe-area-inset-bottom))}
+body.card-fullscreen .fullscreen-exit{display:grid}
+body.card-fullscreen .swipe-stamp{top:calc(28px + env(safe-area-inset-top))}
+body.card-fullscreen .stamp-maybe{top:calc(22px + env(safe-area-inset-top))}
+
 @media (max-width:600px){
   .idea-pitch{font-size:15px!important;line-height:1.5!important}
   .metric strong{font-size:12px!important}
@@ -56,6 +77,9 @@ body.discover-locked .idea-card{touch-action:none}
   body.discover-locked .filter-chip{padding:6px 10px}
   body.discover-locked .action-row{margin-top:8px}
   body.discover-locked .gesture-tip{margin-top:4px}
+  body.card-fullscreen .card-topline{margin-bottom:22px}
+  body.card-fullscreen .idea-name{font-size:clamp(40px,12vw,58px)}
+  body.card-fullscreen .signal-row,body.card-fullscreen .metric-grid{margin:16px 0}
 }
 @media (max-height:720px){
   body.discover-locked .mini-stats{display:none}
@@ -66,4 +90,9 @@ body.discover-locked .idea-card{touch-action:none}
   body.discover-locked .idea-name{font-size:30px}
   body.discover-locked .idea-pitch{font-size:12px!important}
   body.discover-locked .signal-row,body.discover-locked .metric-grid{margin:9px 0}
+  body.card-fullscreen .idea-card{padding:calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom))!important}
+  body.card-fullscreen .card-topline{margin-bottom:14px}
+  body.card-fullscreen .idea-name{font-size:38px!important}
+  body.card-fullscreen .idea-pitch{font-size:13px!important}
+  body.card-fullscreen .signal-row,body.card-fullscreen .metric-grid{margin:10px 0}
 }
