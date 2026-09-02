@@ -66,12 +66,12 @@
         <button class="action action-info" id="infoButton" type="button" aria-label="View details"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></button>
         <button class="action action-save" id="saveButton" type="button" aria-label="Save"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.3 5.3 0 0 0-7.5 0L12 5.9l-1.3-1.3a5.3 5.3 0 1 0-7.5 7.5L12 20.9l8.8-8.8a5.3 5.3 0 0 0 0-7.5Z"/></svg></button>
       </div>
-      <div class="gesture-tip"><span>←</span> pass <i></i> save <span>→</span></div>
+      <div class="gesture-tip"><span>←</span> pass <i></i> <span>↑</span> maybe <i></i> save <span>→</span></div>
     </section>
 
     <section class="screen" id="savedScreen" aria-label="Saved ideas">
-      <div class="section-head"><div><span class="eyebrow">YOUR SHORTLIST</span><h2>Saved ideas</h2><p>Only the ones that survived your thumb.</p></div><div class="count-pill" id="savedCount">0</div></div>
-      <div class="saved-toolbar"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="savedSearch" type="search" placeholder="Search saved ideas" autocomplete="off" /></label></div>
+      <div class="section-head"><div><span class="eyebrow">YOUR SHORTLIST</span><h2>Saved ideas</h2><p>Saved when it's a yes. Maybe when you're not ready to kill it.</p></div><div class="count-pill" id="savedCount">0</div></div>
+      <div class="saved-toolbar"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="savedSearch" type="search" placeholder="Search saved + maybe" autocomplete="off" /></label></div>
       <div class="saved-grid" id="savedGrid"></div>
     </section>
 
@@ -99,5 +99,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="ideas-v2.js"></script>
   <script src="logic-v2.js"></script>
+  <script src="swipe-enhancements.js"></script>
 </body>
 </html>
