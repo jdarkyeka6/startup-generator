@@ -8,6 +8,24 @@ maybeStamp.id = 'maybeStamp';
 maybeStamp.textContent = 'MAYBE';
 document.querySelector('.deck-wrap')?.appendChild(maybeStamp);
 
+const fullscreenButton = $('fullscreenButton');
+const fullscreenExitButton = $('fullscreenExitButton');
+
+function setCardFullscreen(enabled){
+  const discoverActive=document.getElementById('discoverScreen').classList.contains('active');
+  const on=Boolean(enabled)&&discoverActive;
+  document.body.classList.toggle('card-fullscreen',on);
+  if(fullscreenButton){
+    fullscreenButton.setAttribute('aria-pressed',String(on));
+    fullscreenButton.setAttribute('aria-label',on?'Exit full screen card':'Make card full screen');
+    fullscreenButton.title=on?'Exit full screen':'Full screen card';
+  }
+  if(fullscreenExitButton)fullscreenExitButton.setAttribute('aria-hidden',String(!on));
+}
+
+fullscreenButton?.addEventListener('click',()=>setCardFullscreen(!document.body.classList.contains('card-fullscreen')));
+fullscreenExitButton?.addEventListener('click',()=>setCardFullscreen(false));
+
 function isMaybe(id){return state.maybe.includes(id)}
 
 swipe = function(direction,card=cardStack.querySelector('.idea-card')){
@@ -131,6 +149,7 @@ renderSaved();
 
 const originalSwitchScreen=switchScreen;
 switchScreen=function(id){
+  if(id!=='discoverScreen')setCardFullscreen(false);
   document.body.classList.toggle('discover-locked',id==='discoverScreen');
   originalSwitchScreen(id);
 };
@@ -143,7 +162,7 @@ $('resetAllButton').onclick=()=>{
   }
 };
 
-// Keyboard parity for desktop testing: ↑ = Maybe, I = details.
+// Keyboard parity for desktop testing: ↑ = Maybe, F = full screen card, I = details.
 document.addEventListener('keydown',e=>{
   if($('detailSheet').classList.contains('open'))return;
   if(!document.getElementById('discoverScreen').classList.contains('active'))return;
@@ -151,6 +170,11 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();
     e.stopImmediatePropagation();
     swipe('up');
+    return;
+  }
+  if(e.key.toLowerCase()==='f'){
+    e.preventDefault();
+    setCardFullscreen(!document.body.classList.contains('card-fullscreen'));
     return;
   }
   if(e.key.toLowerCase()==='i')openSheet();
