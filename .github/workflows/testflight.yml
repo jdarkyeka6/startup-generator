@@ -1,0 +1,66 @@
+name: SwipeStart TestFlight
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index-v2.html'
+      - 'styles-v2.css'
+      - 'crisp.css'
+      - 'ideas-v2.js'
+      - 'logic-v2.js'
+      - 'swipe-enhancements.js'
+      - 'scripts/prepare-web.mjs'
+      - 'capacitor.config.json'
+      - 'package.json'
+      - 'ios-ci/**'
+      - '.github/workflows/testflight.yml'
+
+concurrency:
+  group: swipestart-testflight
+  cancel-in-progress: false
+
+jobs:
+  build-and-upload:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      FASTLANE_SKIP_UPDATE_CHECK: '1'
+      FASTLANE_HIDE_CHANGELOG: '1'
+      CI: '1'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install web dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Create and sync iOS project
+        run: |
+          npm run ios:add
+          npx cap sync ios
+
+      - name: Install Fastlane
+        run: |
+          cp ios-ci/Gemfile ios/App/Gemfile
+          mkdir -p ios/App/fastlane
+          cp ios-ci/Fastfile ios/App/fastlane/Fastfile
+          cd ios/App
+          bundle config set path vendor/bundle
+          bundle install
+
+      - name: Build and upload to TestFlight
+        run: |
+          cd ios/App
+          bundle exec fastlane beta
