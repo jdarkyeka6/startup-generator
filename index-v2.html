@@ -1,110 +1,67 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#07080d" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="description" content="Swipe through startup ideas, save the best ones, and build your next thing." />
-  <title>SwipeStart</title>
-  <link rel="stylesheet" href="styles-v2.css" />
-  <link rel="stylesheet" href="crisp.css" />
-</head>
-<body>
-  <div class="ambient ambient-a" aria-hidden="true"></div>
-  <div class="ambient ambient-b" aria-hidden="true"></div>
-
-  <main class="app-shell">
-    <header class="topbar">
-      <button class="brand" type="button" id="brandButton" aria-label="Go to discover">
-        <span class="brand-icon" aria-hidden="true"><span></span><span></span></span>
-        <span class="brand-copy"><strong>SwipeStart</strong><small>find your next thing</small></span>
-      </button>
-      <div class="top-actions">
-        <button class="round-button" id="fullscreenButton" type="button" aria-label="Make card full screen" aria-pressed="false" title="Full screen card">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg>
-        </button>
-        <button class="round-button" id="shuffleButton" type="button" aria-label="Shuffle ideas" title="Shuffle ideas">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 7h3.5c1.6 0 2.6.7 3.6 2.2l2.3 3.6c1 1.5 2 2.2 3.6 2.2H21M21 16v5h-5M4 17h3.5c1.3 0 2.2-.4 3-1.4"/></svg>
-        </button>
-        <button class="avatar-button" id="profileButton" type="button" aria-label="Open stats">JS</button>
-      </div>
-    </header>
-
-    <section class="screen active" id="discoverScreen" aria-label="Discover startup ideas">
-      <div class="hero-row">
-        <div>
-          <span class="eyebrow">TODAY'S DECK</span>
-          <h1>Would you build it?</h1>
-          <p>Swipe fast. Trust your first reaction.</p>
-        </div>
-        <div class="deck-progress" aria-label="Deck progress"><strong id="progressCount">1</strong><span>/</span><span id="progressTotal">0</span></div>
-      </div>
-
-      <div class="mini-stats" aria-label="Session stats">
-        <div><span class="stat-dot stat-dot-green"></span><strong id="savedMini">0</strong><small>saved</small></div>
-        <div><span class="stat-dot stat-dot-purple"></span><strong id="seenMini">0</strong><small>seen</small></div>
-        <div><span class="stat-dot stat-dot-orange"></span><strong id="streakMini">0</strong><small>streak</small></div>
-      </div>
-
-      <div class="filter-strip" id="filterStrip" aria-label="Idea categories">
-        <button class="filter-chip active" type="button" data-filter="All">For you</button>
-        <button class="filter-chip" type="button" data-filter="AI">AI</button>
-        <button class="filter-chip" type="button" data-filter="Consumer">Consumer</button>
-        <button class="filter-chip" type="button" data-filter="SaaS">SaaS</button>
-        <button class="filter-chip" type="button" data-filter="Creator">Creator</button>
-        <button class="filter-chip" type="button" data-filter="Local">Local</button>
-      </div>
-
-      <div class="deck-wrap">
-        <div class="swipe-stamp stamp-pass" id="passStamp">PASS</div>
-        <div class="swipe-stamp stamp-save" id="saveStamp">SAVE</div>
-        <div class="card-stack" id="cardStack" aria-live="polite"></div>
-        <button class="fullscreen-exit" id="fullscreenExitButton" type="button" aria-label="Exit full screen card" title="Exit full screen">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v6H3M15 3v6h6M9 21v-6H3M15 21v-6h6"/></svg>
-        </button>
-      </div>
-
-      <div class="action-row">
-        <button class="action action-pass" id="passButton" type="button" aria-label="Pass"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-        <button class="action action-undo" id="undoButton" type="button" aria-label="Undo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7H5v-4M5.5 7.5A8 8 0 1 1 4 15"/></svg></button>
-        <button class="action action-info" id="infoButton" type="button" aria-label="View details"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></button>
-        <button class="action action-save" id="saveButton" type="button" aria-label="Save"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.3 5.3 0 0 0-7.5 0L12 5.9l-1.3-1.3a5.3 5.3 0 1 0-7.5 7.5L12 20.9l8.8-8.8a5.3 5.3 0 0 0 0-7.5Z"/></svg></button>
-      </div>
-      <div class="gesture-tip"><span>←</span> pass <i></i> <span>↑</span> maybe <i></i> save <span>→</span></div>
-    </section>
-
-    <section class="screen" id="savedScreen" aria-label="Saved ideas">
-      <div class="section-head"><div><span class="eyebrow">YOUR SHORTLIST</span><h2>Saved ideas</h2><p>Saved when it's a yes. Maybe when you're not ready to kill it.</p></div><div class="count-pill" id="savedCount">0</div></div>
-      <div class="saved-toolbar"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="savedSearch" type="search" placeholder="Search saved + maybe" autocomplete="off" /></label></div>
-      <div class="saved-grid" id="savedGrid"></div>
-    </section>
-
-    <section class="screen" id="statsScreen" aria-label="Your stats">
-      <div class="section-head"><div><span class="eyebrow">YOUR SIGNAL</span><h2>Idea stats</h2><p>A tiny dashboard for your founder brain.</p></div></div>
-      <div class="stats-grid">
-        <article class="big-stat"><small>Ideas seen</small><strong id="statsSeen">0</strong><span>cards judged</span></article>
-        <article class="big-stat"><small>Saved</small><strong id="statsSaved">0</strong><span>worth revisiting</span></article>
-        <article class="big-stat"><small>Save rate</small><strong id="statsRate">0%</strong><span>your selectivity</span></article>
-        <article class="big-stat"><small>Top category</small><strong class="category-stat" id="statsCategory">—</strong><span>your current bias</span></article>
-      </div>
-      <div class="taste-card"><div class="taste-copy"><span class="eyebrow">FOUNDER TASTE</span><h3 id="tasteTitle">Still calibrating</h3><p id="tasteText">Swipe a few more ideas and your taste profile will appear here.</p></div><div class="taste-orb" id="tasteOrb"><span>✦</span></div></div>
-      <button class="danger-button" id="resetAllButton" type="button">Reset all local data</button>
-    </section>
-
-    <nav class="bottom-nav" aria-label="Main navigation">
-      <button class="nav-item active" type="button" data-screen="discoverScreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6L12 3Z"/><path d="m18 15 .8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15Z"/></svg><span>Discover</span></button>
-      <button class="nav-item" type="button" data-screen="savedScreen"><span class="nav-badge" id="savedBadge">0</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.3 5.3 0 0 0-7.5 0L12 5.9l-1.3-1.3a5.3 5.3 0 1 0-7.5 7.5L12 20.9l8.8-8.8a5.3 5.3 0 0 0 0-7.5Z"/></svg><span>Saved</span></button>
-      <button class="nav-item" type="button" data-screen="statsScreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span>Stats</span></button>
-    </nav>
-  </main>
-
-  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
-  <aside class="detail-sheet" id="detailSheet" aria-hidden="true" aria-label="Idea details"><div class="sheet-handle"></div><div id="sheetContent"></div></aside>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="ideas-v2.js"></script>
-  <script src="logic-v2.js"></script>
-  <script src="swipe-enhancements.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d19"><title>PC Forge | Build your PC</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f5f7ff;background:#080d19}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -10%,#203b6d 0,transparent 42%),#080d19;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}header{position:sticky;top:0;z-index:5;background:#0a1020ed;backdrop-filter:blur(18px);border-bottom:1px solid #26344c;padding:16px max(18px,calc((100vw - 1000px)/2));display:flex;align-items:center;justify-content:space-between}.logo{font-size:22px;font-weight:850;letter-spacing:-1px}.logo b{color:#68aaff}.pill{border:1px solid #334762;background:#17233a;color:#c7d9fa;padding:8px 12px;border-radius:50px;font-size:12px}main{max-width:1000px;margin:auto;padding:24px 16px 100px}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:2px;color:#81baff}h1{font-size:clamp(30px,7vw,48px);margin:8px 0;letter-spacing:-1.6px}p{color:#a6b7d0;margin:6px 0 0;line-height:1.5}.btn{border:1px solid #355072;border-radius:12px;padding:11px 15px;color:#e9f1ff;background:#172841;font-weight:700}.btn.primary{background:#428cff;border-color:#428cff;color:#07101f}.btn.danger{color:#ffb2bb;border-color:#773b49}.actions{display:flex;gap:8px;flex-wrap:wrap}.overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}.metric{background:#111c30;border:1px solid #263954;border-radius:16px;padding:17px}.metric small{display:block;color:#9bb0cc;font-size:11px}.metric strong{display:block;font-size:clamp(18px,4vw,29px);margin-top:8px}.section{background:#101a2c;border:1px solid #293b55;border-radius:18px;margin:16px 0;padding:17px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.section h2{margin:0;font-size:18px}.status{font-size:12px;border-radius:30px;padding:7px 10px;background:#20344b;color:#a8d2ff}.status.good{background:#153c32;color:#85e7bb}.status.bad{background:#4b2732;color:#ff9ea7}.warning{border-left:3px solid #f8bc66;background:#342b25;padding:12px;margin:9px 0;border-radius:8px;color:#ffe2ad;font-size:13px}.error{border-left-color:#ff6f83;background:#39212c;color:#ffbec6}.success{border-left-color:#59d9a1;background:#17372f;color:#b2f3d5}.parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.part{border:1px solid #2b3d56;border-radius:14px;padding:14px;background:#152138;min-height:122px;display:flex;flex-direction:column;justify-content:space-between}.part .category{color:#91a9c7;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700}.part h3{font-size:14px;line-height:1.35;margin:8px 0}.part .bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}.price{color:#8edec1;font-weight:800}.part button{background:#263f64;color:#d7eaff;border:0;border-radius:9px;padding:8px 11px;font-size:12px;font-weight:750}.muted{color:#8598b5;font-size:12px}.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar input,.toolbar select,.edit input{background:#0b1527;color:#fff;border:1px solid #354962;border-radius:10px;padding:12px;min-width:0}.toolbar input{flex:1}.toolbar select{max-width:145px}.catalog{display:grid;gap:9px;max-height:57vh;overflow:auto;margin-top:14px}.item{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#15243c;border:1px solid #2b3d55;border-radius:12px;padding:12px}.item strong{font-size:14px}.item small{display:block;color:#9aafcb;margin-top:5px}.item .btn{white-space:nowrap}.overlay{position:fixed;inset:0;background:#000b;z-index:9;display:none;align-items:flex-end;justify-content:center}.overlay.open{display:flex}.modal{background:#101b2e;border:1px solid #38506c;border-radius:22px 22px 0 0;width:100%;max-width:750px;padding:20px;max-height:90dvh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0}.edit{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.edit input{flex:1}.hint{color:#8da3bf;font-size:12px;margin-top:14px}footer{text-align:center;color:#7188a8;font-size:12px;margin:24px 0}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#dceaff;color:#10233c;padding:11px 18px;border-radius:12px;z-index:20;display:none;white-space:nowrap}@media(max-width:550px){.parts{grid-template-columns:1fr}.overview{gap:7px}.metric{padding:12px}.metric strong{font-size:20px}.section{padding:13px}.item{align-items:flex-start}.item .btn{padding:9px}}
+</style></head><body>
+<header><div class="logo">⚡ PC<span style="color:#68aaff">Forge</span></div><div class="pill">🇦🇺 AUD · Offline catalogue</div></header>
+<main><div class="hero"><div><div class="eyebrow">YOUR CUSTOM PC</div><h1>Build something powerful.</h1><p>Pick parts, catch compatibility problems and plan your next rig.</p></div><div class="actions"><button class="btn" id="save">Save build</button><button class="btn" id="share">Share</button><button class="btn danger" id="reset">Reset</button></div></div>
+<div class="overview"><div class="metric"><small>Estimated total</small><strong id="total">$0</strong></div><div class="metric"><small>Estimated power</small><strong id="power">0 W</strong></div><div class="metric"><small>Components</small><strong id="count">0 / 8</strong></div></div>
+<section class="section"><div class="section-title"><h2>Compatibility report</h2><span id="compatBadge" class="status">Select parts</span></div><div id="report"></div></section>
+<section class="section"><div class="section-title"><h2>System builder</h2><button class="btn primary" id="templates">Starter build</button></div><div id="parts" class="parts"></div></section>
+<section class="section"><div class="section-title"><h2>Saved builds</h2><span class="muted">Stored on this device</span></div><div id="savedBuilds"></div></section>
+<footer>Indicative sample prices only, not live retailer quotes. Verify firmware, dimensions, connectors and final prices before buying.</footer></main>
+<div id="overlay" class="overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><h2 id="modalTitle">Choose a part</h2><button class="btn" id="close">Close ✕</button></div><div class="toolbar" style="margin-top:14px"><input id="search" type="search" placeholder="Search components…"><select id="sort"><option value="name">Name</option><option value="low">Price: low</option><option value="high">Price: high</option></select></div><div id="catalog" class="catalog"></div><div class="edit"><input id="customName" placeholder="Custom part name"><input id="customPrice" type="number" min="0" placeholder="AUD price"><button class="btn" id="addCustom">Add custom</button></div><div class="hint">Custom parts are not fully compatibility-verified. Catalogue prices are illustrative.</div></div></div><div id="toast" role="status"></div>
+<script>
+const categories=[["cpu","Processor"],["cooler","CPU cooler"],["board","Motherboard"],["ram","Memory"],["gpu","Graphics card"],["storage","Storage"],["case","Case"],["psu","Power supply"]];
+const raw=[
+["cpu","AMD Ryzen 5 5600",179,{socket:"AM4",watts:65}],["cpu","AMD Ryzen 5 7600",299,{socket:"AM5",watts:65}],["cpu","AMD Ryzen 7 7800X3D",549,{socket:"AM5",watts:120}],["cpu","AMD Ryzen 7 9800X3D",749,{socket:"AM5",watts:120}],["cpu","Intel Core i5-14600K",429,{socket:"LGA1700",watts:181}],["cpu","Intel Core Ultra 7 265K",599,{socket:"LGA1851",watts:250}],
+["cooler","AMD Wraith Stealth",0,{socket:["AM4","AM5"],height:54,watts:0}],["cooler","Thermalright Peerless Assassin 120 SE",65,{socket:["AM4","AM5","LGA1700","LGA1851"],height:155}],["cooler","DeepCool AK400",49,{socket:["AM4","AM5","LGA1700"],height:155}],["cooler","Arctic Liquid Freezer III 360",169,{socket:["AM4","AM5","LGA1700","LGA1851"],radiator:360}],
+["board","Gigabyte B550M DS3H AC",159,{socket:"AM4",memory:"DDR4",form:"mATX",slots:4}],["board","MSI B650 Gaming Plus WiFi",249,{socket:"AM5",memory:"DDR5",form:"ATX",slots:4}],["board","ASRock X870 Pro-A WiFi",279,{socket:"AM5",memory:"DDR5",form:"ATX",slots:4}],["board","Gigabyte B760M DS3H DDR4",179,{socket:"LGA1700",memory:"DDR4",form:"mATX",slots:4}],["board","MSI Z890 Gaming Plus WiFi",399,{socket:"LGA1851",memory:"DDR5",form:"ATX",slots:4}],
+["ram","Corsair Vengeance 32GB DDR4-3200",119,{memory:"DDR4",sticks:2}],["ram","Kingston Fury Beast 16GB DDR4-3200",79,{memory:"DDR4",sticks:2}],["ram","Lexar THOR RGB 32GB DDR5-6000",239,{memory:"DDR5",sticks:2}],["ram","G.Skill Flare X5 32GB DDR5-6000",219,{memory:"DDR5",sticks:2}],["ram","Corsair Vengeance 64GB DDR5-6000",419,{memory:"DDR5",sticks:2}],
+["gpu","NVIDIA GeForce RTX 4060 8GB",449,{watts:115,length:245}],["gpu","NVIDIA GeForce RTX 5060 8GB",499,{watts:145,length:245}],["gpu","NVIDIA GeForce RTX 5070 12GB",999,{watts:250,length:300}],["gpu","NVIDIA GeForce RTX 5070 Ti 16GB",1399,{watts:300,length:320}],["gpu","AMD Radeon RX 9060 XT 16GB",699,{watts:160,length:280}],["gpu","AMD Radeon RX 9070 XT 16GB",1099,{watts:304,length:330}],
+["storage","Lexar NQ790 1TB NVMe",99,{}],["storage","WD Black SN850X 2TB NVMe",229,{}],["storage","Samsung 990 Pro 2TB NVMe",289,{}],["storage","Crucial P3 Plus 1TB NVMe",109,{}],
+["case","Corsair 4000D Airflow",139,{forms:["ATX","mATX","ITX"],gpu:360,cooler:170,radiator:360}],["case","NZXT H5 Flow",149,{forms:["ATX","mATX","ITX"],gpu:365,cooler:165,radiator:240}],["case","Fractal Pop Mini Air",139,{forms:["mATX","ITX"],gpu:365,cooler:170,radiator:240}],["case","Lian Li Lancool 216",179,{forms:["ATX","mATX","ITX"],gpu:392,cooler:180,radiator:360}],
+["psu","Corsair RM750e 750W",159,{capacity:750}],["psu","MSI MAG A650BN 650W",89,{capacity:650}],["psu","Corsair RM850e 850W",189,{capacity:850}],["psu","Seasonic Focus GX-1000 1000W",259,{capacity:1000}],["psu","Gigabyte P750BS 750W",109,{capacity:750}]
+];
+const catalog=raw.map((r,i)=>({id:"p"+i,type:r[0],name:r[1],price:r[2],...r[3]}));
+const $=id=>document.getElementById(id);let build={},activeType="cpu";let saved=[];
+try{build=JSON.parse(localStorage.getItem("pcforge.build")||"{}");saved=JSON.parse(localStorage.getItem("pcforge.saved")||"[]")}catch(e){}
+function persist(){localStorage.setItem("pcforge.build",JSON.stringify(build));localStorage.setItem("pcforge.saved",JSON.stringify(saved))}
+const money=n=>new Intl.NumberFormat("en-AU",{style:"currency",currency:"AUD",maximumFractionDigits:0}).format(n);
+function get(type){return build[type]||null}
+function report(){let errors=[],warnings=[];const c=get("cpu"),b=get("board"),r=get("ram"),g=get("gpu"),k=get("case"),p=get("psu"),cool=get("cooler");let watts=(c?.watts||0)+(g?.watts||0)+75;
+if(c&&b&&c.socket&&b.socket&&c.socket!==b.socket)errors.push("CPU socket "+c.socket+" does not match motherboard "+b.socket+".");
+if(b&&r&&b.memory&&r.memory&&b.memory!==r.memory)errors.push("Motherboard uses "+b.memory+" but selected RAM is "+r.memory+".");
+if(b&&r&&b.slots&&r.sticks&&r.sticks>b.slots)errors.push("RAM kit has more sticks than the motherboard supports.");
+if(k&&b&&k.forms&&b.form&&!k.forms.includes(b.form))errors.push(b.form+" motherboard will not fit in this case.");
+if(k&&g&&k.gpu&&g.length&&g.length>k.gpu)errors.push("GPU length exceeds case clearance.");
+if(k&&cool&&k.cooler&&cool.height&&cool.height>k.cooler)errors.push("CPU cooler exceeds case height clearance.");
+if(k&&cool&&k.radiator&&cool.radiator&&cool.radiator>k.radiator)errors.push("Radiator size exceeds the case's listed support.");
+if(c&&cool&&c.socket&&cool.socket&&!cool.socket.includes(c.socket))errors.push("CPU cooler does not support CPU socket.");
+if(p&&p.capacity){if(watts>p.capacity)errors.push("Estimated system load exceeds PSU rating.");else if(watts>p.capacity*.8)warnings.push("Estimated load exceeds 80% of PSU rating; consider more headroom.");}
+if(c&&!cool)warnings.push("Check whether your processor includes a suitable stock cooler.");
+if(Object.values(build).some(x=>x.custom))warnings.push("Custom components have unverified compatibility specifications.");
+warnings.push("BIOS support, PSU connectors, RAM QVL and detailed physical clearances must be checked manually.");
+const filled=categories.filter(([t])=>get(t)).length;
+$("total").textContent=money(Object.values(build).reduce((a,x)=>a+(Number(x.price)||0),0));
+$("power").textContent=watts+" W";$("count").textContent=filled+" / 8";
+$("compatBadge").className="status "+(errors.length?"bad":filled===8?"good":"");
+$("compatBadge").textContent=errors.length?errors.length+" conflict(s)":filled===8?"No detected conflicts":"Build incomplete";
+$("report").innerHTML=[...errors.map(s=>'<div class="warning error">⛔ '+esc(s)+'</div>'),...warnings.map(s=>'<div class="warning">⚠️ '+esc(s)+'</div>')].join("")||'<div class="warning success">No issues found in the available checks.</div>';
+}
+function esc(s){return String(s).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
+function render(){const holder=$("parts");holder.replaceChildren();for(const [type,label] of categories){let item=get(type),el=document.createElement("article");el.className="part";el.innerHTML='<div><div class="category">'+esc(label)+'</div><h3>'+esc(item?.name||"No part selected")+'</h3></div><div class="bottom"><span class="'+(item?"price":"muted")+'">'+(item?money(item.price):"Choose a part")+'</span><button type="button">'+(item?"Change":"Add part")+' +</button></div>';el.querySelector("button").onclick=()=>openPicker(type);holder.append(el)}report();renderSaved();persist()}
+function openPicker(type){activeType=type;$("modalTitle").textContent="Choose "+categories.find(x=>x[0]===type)[1];$("search").value="";$("sort").value="name";$("customName").value="";$("customPrice").value="";$("overlay").classList.add("open");listCatalog();$("search").focus()}
+function closePicker(){$("overlay").classList.remove("open")}
+function listCatalog(){let q=$("search").value.trim().toLowerCase(),order=$("sort").value;let list=catalog.filter(x=>x.type===activeType&&x.name.toLowerCase().includes(q));list.sort((a,b)=>order==="low"?a.price-b.price:order==="high"?b.price-a.price:a.name.localeCompare(b.name));$("catalog").replaceChildren();if(get(activeType)){const remove=document.createElement("button");remove.className="btn danger";remove.textContent="Remove selected part";remove.onclick=()=>{delete build[activeType];closePicker();render()};$("catalog").append(remove)}for(const x of list){let el=document.createElement("div");el.className="item";el.innerHTML='<div><strong>'+esc(x.name)+'</strong><small>'+money(x.price)+' · '+esc(Object.entries(x).filter(([k])=>!["id","type","name","price"].includes(k)).map(([k,v])=>k+": "+(Array.isArray(v)?v.join(", "):v)).join(" · "))+'</small></div><button class="btn primary">Select</button>';el.querySelector("button").onclick=()=>{build[activeType]={...x};closePicker();render();toast("Part added")};$("catalog").append(el)}if(!list.length)$("catalog").textContent="No matching parts. Add a custom part below."}
+function renderSaved(){const el=$("savedBuilds");el.replaceChildren();if(!saved.length){el.innerHTML='<p>No saved builds yet. Save your first configuration above.</p>';return}saved.forEach((s,i)=>{let row=document.createElement("div");row.className="item";row.innerHTML='<div><strong>'+esc(s.name)+'</strong><small>'+esc(s.date)+' · '+money(s.total)+'</small></div><div class="actions"><button class="btn load">Load</button><button class="btn danger del">✕</button></div>';row.querySelector(".load").onclick=()=>{if(confirm("Replace current build with this saved build?")){build=structuredClone(s.parts);render();toast("Build loaded")}};row.querySelector(".del").onclick=()=>{saved.splice(i,1);render()};el.append(row)})}
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$("toast").style.display="none",2400)}
+$("close").onclick=closePicker;$("overlay").onclick=e=>{if(e.target===$("overlay"))closePicker()};$("search").oninput=listCatalog;$("sort").onchange=listCatalog;
+$("addCustom").onclick=()=>{let name=$("customName").value.trim(),price=Number($("customPrice").value);if(!name||!Number.isFinite(price)||price<0){toast("Enter a name and valid price");return}build[activeType]={type:activeType,name,price,custom:true};closePicker();render()};
+$("save").onclick=()=>{if(!Object.keys(build).length){toast("Add a part first");return}let name=prompt("Build name","My PC Build");if(name===null)return;saved.unshift({name:name.trim()||"My PC Build",date:new Date().toLocaleDateString("en-AU"),total:Object.values(build).reduce((a,x)=>a+Number(x.price||0),0),parts:structuredClone(build)});render();toast("Build saved")};
+$("reset").onclick=()=>{if(confirm("Clear the current parts list?")){build={};render()}};
+$("templates").onclick=()=>{if(Object.keys(build).length&&!confirm("Replace current build with a sample gaming build?"))return;build={};for(const [type,name] of [["cpu","AMD Ryzen 5 7600"],["cooler","Thermalright Peerless Assassin 120 SE"],["board","MSI B650 Gaming Plus WiFi"],["ram","G.Skill Flare X5 32GB DDR5-6000"],["gpu","NVIDIA GeForce RTX 5060 8GB"],["storage","Lexar NQ790 1TB NVMe"],["case","Corsair 4000D Airflow"],["psu","Corsair RM750e 750W"]])build[type]={...catalog.find(x=>x.type===type&&x.name===name)};render();toast("Starter build loaded")};
+$("share").onclick=async()=>{const data=JSON.stringify({name:"PC Forge Build",parts:build});try{if(navigator.share)await navigator.share({title:"My PC build",text:categories.map(([t,l])=>l+": "+(get(t)?.name||"—")).join("\n")+"\nTotal: "+$("total").textContent});else if(navigator.clipboard){await navigator.clipboard.writeText(data);toast("Build JSON copied")}else{prompt("Copy build JSON",data)}}catch(e){if(e.name!=="AbortError")toast("Sharing unavailable")}};
+const hash=new URLSearchParams(location.hash.slice(1)).get("build");if(hash){try{const decoded=JSON.parse(decodeURIComponent(atob(hash)));if(decoded&&typeof decoded==="object")build=decoded}catch(e){}}
+render();
+</script></body></html>
