@@ -64,4 +64,4 @@ $("templates").onclick=()=>{if(Object.keys(build).length&&!confirm("Replace curr
 $("share").onclick=async()=>{const data=JSON.stringify({name:"PC Forge Build",parts:build});try{if(navigator.share)await navigator.share({title:"My PC build",text:categories.map(([t,l])=>l+": "+(get(t)?.name||"—")).join("\n")+"\nTotal: "+$("total").textContent});else if(navigator.clipboard){await navigator.clipboard.writeText(data);toast("Build JSON copied")}else{prompt("Copy build JSON",data)}}catch(e){if(e.name!=="AbortError")toast("Sharing unavailable")}};
 const hash=new URLSearchParams(location.hash.slice(1)).get("build");if(hash){try{const decoded=JSON.parse(decodeURIComponent(atob(hash)));if(decoded&&typeof decoded==="object")build=decoded}catch(e){}}
 render();
-</script></body></html>
+</script><script src="retail.js"></script></body></html>
