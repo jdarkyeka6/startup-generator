@@ -1,8 +1,8 @@
 {
   "appId": "com.jdarkyeka6.swipestart",
-  "appName": "SwipeStart",
+  "appName": "Aether Particle Lab",
   "webDir": "www",
-  "backgroundColor": "#07080d",
+  "backgroundColor": "#030714",
   "ios": {
     "contentInset": "always"
   }
